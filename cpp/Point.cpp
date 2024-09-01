@@ -5,6 +5,16 @@ struct Point {
     int x;
     int y;
 
+    Point() {
+        this->x = 0;
+        this->y = 0;
+    }
+
+    Point(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+
     double distance(const struct Point& other) const {
         return hypot(this->x-other.x, this->y-other.y);
     }
@@ -18,13 +28,11 @@ struct Point {
     }
 
     struct Point operator+(const struct Point& other) const {
-        struct Point sum = {this->x+other.x, this->y+other.y};
-        return sum;
+        return Point(this->x+other.x, this->y+other.y);
     }
 
     struct Point operator-(const struct Point& other) const {
-        struct Point diff = {this->x-other.x, this->y-other.y};
-        return diff;
+        return Point(this->x-other.x, this->y-other.y);
     }
 };
 
@@ -34,21 +42,14 @@ std::ostream& operator<<(std::ostream& out, const struct Point& point) {
 }
 
 int main() {
-    struct Point a = {1, 10};
-    struct Point b = {2, 4};
-
+    struct Point a;
+    struct Point b = Point(1, 10);
+    
     std::cout << a << std::endl;
-    std::cout << a.distance(b) << std::endl;
-    std::cout << a << std::endl;
+    std::cout << b << std::endl;
 
     std::cout << a + b << std::endl;
     std::cout << a - b << std::endl;
-
-    if ( a == b ) {
-        std::cout << a << " is equal to " << b << std::endl;
-    } else {
-        std::cout << a << " is not equal to " << b << std::endl;
-    }
 
     return 0;
 }
